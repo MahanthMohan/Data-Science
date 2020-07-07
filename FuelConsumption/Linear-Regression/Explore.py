@@ -9,10 +9,15 @@ df.describe() # Summarize the data
 cdf = df[['ENGINESIZE','CYLINDERS','FUELCONSUMPTION_COMB','CO2EMISSIONS']] # Only the datapoints we need for the linear regression
 cdf.head(9)
 
+plt.figure(1)
 plt.title('CO2 Emissions')
-
 plt.scatter(cdf.ENGINESIZE, cdf.CO2EMISSIONS, c="blue")
 plt.xlabel('Engine Size')
 plt.ylabel('CO2 Emissions')
 
+plt.figure(2)
+plt.title('CO2 Emissions')
+plt.scatter(cdf.CYLINDERS, cdf.CO2EMISSIONS, c='red')
+plt.xlabel('Cylinders')
+plt.ylabel('CO2 Emissions')
 plt.show()
