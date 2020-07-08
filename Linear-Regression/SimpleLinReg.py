@@ -4,7 +4,7 @@ import pylab as pl
 import numpy as np # A python math library
 from sklearn import linear_model # Linear Model package from sklearn
 
-df = pd.read_csv('Dataset/FuelConsumption.csv')
+df = pd.read_csv('Data/Dataset/FuelConsumption.csv')
 df.head() # head into the dataset
 
 cdf = df[['ENGINESIZE','CYLINDERS','FUELCONSUMPTION_COMB','CO2EMISSIONS']] # Only the datapoints we need for the linear regression

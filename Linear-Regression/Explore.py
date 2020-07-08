@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt # A data visualization library
 import pandas as pd # A data manipulation library  
 import numpy as np # A python math library
 
-df = pd.read_csv('Dataset/FuelConsumption.csv')
+df = pd.read_csv('Data/Dataset/FuelConsumption.csv')
 df.head() # head into the dataset
 df.describe() # Summarize the data
 
