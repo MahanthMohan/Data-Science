@@ -1,4 +1,5 @@
 import numpy as np
+import math
 
 def Jaccard(y, y_hat):
     Union = []
@@ -29,18 +30,27 @@ def ConfusionMatrix(Confusion_Matrix, value):
         recall = recall(TP, FN)
         return [f'precision: {precision}',f'recall: {recall}']
 
-def F1_score(precision, recall):    
+def F1_score(precision, recall):
     F1_score = (2 * precision * recall)/(precision + recall)
     return F1_score
 
 def log_loss(y, y_hat):
-    log_loss = (y * y_hat) + (1 - y) * np.log(1 - y_hat)
-    return log_loss
+    if y_hat != 1:
+        log_loss = (y * y_hat) + (1 - y) * np.log(1 - y_hat)
+        return log_loss
+    else:
+        return "The model has an infinite Log Loss"
 
-y = [0, 0, 0, 0, 0, 1, 1, 1, 1, 1]
-y_hat = [1, 1, 0, 0, 0, 1, 1, 1, 1, 1]
-values = "6, 9, 1, 24".split(",")
-confusion_matrix = np.array([values]).reshape(2,2)
-print(Jaccard(y, y_hat))
-print(ConfusionMatrix(confusion_matrix, 1))
-print(ConfusionMatrix(confusion_matrix, 1))
+def Entropy(Event_A, Event_B):
+    pA = Event_A/(Event_A + Event_B)
+    pB = Event_B/(Event_A + Event_B)
+    E = -pA * math.log2(pA) - pB * math.log2(pB)
+    return E
+
+def weight(a, b):
+    weight = a/(a + b)
+    return weight
+
+def InformationGain(Before, After, weight):
+    IG = Before - weight * After
+    return IG

@@ -20,9 +20,3 @@ def KNN(data_points, unknown, k_value):
         if dist(unknown, data_points[i]) in k_distances:
             neighbours.append(data_points[i])
     return neighbours
-
-
-data_points = [[100,18], [44,3], [17,8], [9,6], [30,2]]
-unknown = [4,6]
-k_value = 3
-print(KNN(data_points, unknown, k_value))
