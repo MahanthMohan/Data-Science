@@ -10,7 +10,7 @@ from sklearn import svm
 cell_df = pd.read_csv('Data/cell_samples.csv')
 cell_df.head()
 
-cell_df = cell_df[pd.to_numeric(cell_df['BareNuc'], errors='coerce')]
+cell_df = cell_df[pd.to_numeric(cell_df['BareNuc'], errors='coerce').notnull()]
 for element in cell_df['BareNuc']:
     element = int(element)
 
@@ -32,4 +32,5 @@ clf.fit(X_train, y_train)
 yhat = clf.predict(X_test)
 yhat[0:5]
 
+print('The Classified Results using SVM are: ')
 print(yhat)

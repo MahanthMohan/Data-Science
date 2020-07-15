@@ -1,11 +1,11 @@
 import numpy as np
 
 def dist(X, Y):
-    distance, leng = (0, len(X))
-    for i in range(leng):
-        function = np.power((Y[i] - X[i]), leng)
+    distance = 0
+    for i in range(len(X)):
+        function = np.power((Y[i] - X[i]), 2)
         distance = np.abs(distance + function)
-    distance = np.power(distance, (1/leng))
+    distance = np.power(distance, (1/2))
     return distance
 
 def KNN(data_points, unknown, k_value):
