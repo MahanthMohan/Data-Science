@@ -12,25 +12,17 @@ df = pd.read_csv('Data/covid.csv')
 df.head()
 df['dateRep'] = pd.to_datetime(df['dateRep']).dt.strftime("%Y%m%d")
 
-cdf = df[['dateRep', 'cases', 'deaths', 'Cumulative_number_for_14_days_of_COVID-19_cases_per_100000']]
+
+condition = pd.notnull(df[['dateRep', 'cases', 'deaths', 'Cumulative_number_for_14_days_of_COVID-19_cases_per_100000']])
+cdf = df[condition]
 cdf.head()
 
-x_data, y_data = (cdf['dateRep'].values, cdf['Cumulative_number_for_14_days_of_COVID-19_cases_per_100000'])
+x_data, y_data = (float(cdf['dateRep'].values), float(cdf['Cumulative_number_for_14_days_of_COVID-19_cases_per_100000'].values))
 
-# Data Normalization
-xdata = x_data/max(x_data)
-ydata = y_data/max(y_data)
-
-# Optimization of the weight vector
-popt = curve_fit(sigmoid, xdata, ydata)
-print(popt)
-
-fig = plt.figure(1)
-ax = fig.add_subplot()
-ax.plot(x_data, y_data, 'ro')
-ax.xlabel('Time (in days)')
-ax.ylabel('COVID cases per 100000')
-ax.set_xticks(())
-ax.set_yticks(())
+fig = plt.figure()
+plt.plot(x_data, y_data, 'ro')
+plt.xlabel('Time (in days)')
+plt.ylabel('COVID cases per 100000')
+plt.xticks(None)
+plt.yticks(None)
 plt.show()
-
