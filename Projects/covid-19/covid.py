@@ -3,10 +3,8 @@ import pandas as pd
 from scipy.optimize import curve_fit
 import matplotlib.pyplot as plt
 
-def sigmoid(x, Beta_1, Beta_2):
-    f = lambda x, Beta_1, Beta_2: 1/(1 + np.exp(-Beta_1 * (x - Beta_2)))
-    y = f(x, Beta_1, Beta_2)
-    return y
+def function(x,a,b,c,d):
+    return a*(x**3) + b*(x**2) + c*x + d
 
 df = pd.read_csv('Data/covid.csv')
 df.head()
@@ -17,12 +15,16 @@ condition = pd.notnull(df[['dateRep', 'cases', 'deaths', 'Cumulative_number_for_
 cdf = df[condition]
 cdf.head()
 
-x_data, y_data = (float(cdf['dateRep'].values), float(cdf['Cumulative_number_for_14_days_of_COVID-19_cases_per_100000'].values))
+x_data, y_data = (cdf['dateRep'].values, cdf['Cumulative_number_for_14_days_of_COVID-19_cases_per_100000'].values)
+
+coef = curve_fit(function, x_data, y_data)[0]
+print('The coefficients are: ')
+print(coef)
 
 fig = plt.figure()
-plt.plot(x_data, y_data, 'ro')
+plt.plot(x_data, y_data, 'bo')
+x = np.linspace(0, len(x_data), 1)
+plt.plot(x, function(x, coef[0], coef[1], coef[2], coef[3]), 'r')
 plt.xlabel('Time (in days)')
 plt.ylabel('COVID cases per 100000')
-plt.xticks(None)
-plt.yticks(None)
 plt.show()
