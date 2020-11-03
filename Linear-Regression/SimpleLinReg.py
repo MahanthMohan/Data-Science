@@ -20,7 +20,7 @@ train_y = np.asanyarray(train[['CO2EMISSIONS']])
 regression.fit(train_x, train_y)
 
 plt.scatter(train.ENGINESIZE, train.CO2EMISSIONS, color='blue')
-plt.plot(train_x, regression.coef_ * train_x + regression.intercept, '-r')
+plt.plot(train_x, regression.coef_ * train_x + regression.intercept_, '-r')
 plt.xlabel("Engine Size")
 plt.ylabel("CO2 Emissions")
 plt.show()
